@@ -167,7 +167,8 @@ int main (){
     CS_Student stud;
     stud.registerStudent();
     stud.getStudentInfo();
-
+    system ("pause");
+    return false;
 }
 /* 
 1- members are 
