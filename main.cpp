@@ -79,7 +79,7 @@ void get_set_data(string name, int id, string email, string major, float grades[
 } 
 
 //registerStudent method
-void registerStudent(){
+virtual void registerStudent(){
     string name, email, major, pass;
     int id;
     float grades[5], score;
@@ -102,7 +102,7 @@ void registerStudent(){
 }
 
 //getStudentInfo method
-void getStudentInfo(){
+virtual void getStudentInfo(){
     //printing name
     cout << "Your name is: ";
     for (int  i = 0;; i++)
@@ -154,26 +154,78 @@ void getStudentInfo(){
     cout << endl << "Your id is: " << student_ID << endl;
 
     //printing score
-    cout << "Your score is: " << student_score;
+    cout << "Your score is: " << student_score << endl;
     
 }
-};
-class CPG_Student: protected CS_Student {
-    
+
+//calculateGPA method
+virtual int calculateGPA(){
+    int x;
+    for (int  i = 0; i < 5; i++)
+    {
+        x += student_grades[i];
+    }
+    return x / 100;
+}
 };
 
+
+class CPG_Student: public CS_Student {
+    protected:
+    char pg_student_job_title[20];
+    public:
+    //constructor
+    CPG_Student() : CS_Student(){
+        
+        //initializing jobtitle
+        for (int i = 0; i < 20; i++)
+        pg_student_job_title[i] = 0;        
+    }
+    ;
+    
+    //encapsulation method for pg_student_job_title
+    void get_set_pg(string jobtitle){
+        for(int i = 0; i < jobtitle.length(); i++)
+        pg_student_job_title[i] = jobtitle[i];
+    }
+
+    
+
+    // registerStudent method for CPG_Student
+    void registerStudent(){
+            string jobtitle;
+        CS_Student::registerStudent();
+        cout << "Enter your job title: ";
+        cin >> jobtitle;
+        get_set_pg(jobtitle);
+        }
+    
+    // getStudentInfo method for CPG_Student
+    void getStudentInfo(){
+        CS_Student::getStudentInfo();
+
+
+        //printing job title
+        cout << "Your job title is: ";
+       for (int  i = 0;; i++)
+    {
+        if(pg_student_job_title[i] != 0)
+            cout << pg_student_job_title[i];
+        else
+        break;
+    }
+        cout << endl;
+    }
+};
+ 
 
 int main (){
-    CS_Student stud;
+   /*  CS_Student stud;
     stud.registerStudent();
-    stud.getStudentInfo();
+    stud.getStudentInfo(); */
+    CPG_Student xar;
+    xar.registerStudent();
+    xar.getStudentInfo();
     system ("pause");
     return false;
 }
-/* 
-1- members are 
-- array of chars , name
-- array of chars, username
-- arrya of floats, student grade
--
- */

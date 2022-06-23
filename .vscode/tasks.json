@@ -4,7 +4,7 @@
 		{
 			"type": "cppbuild",
 			"label": "G++ Compiler",
-			"command": "C:\\TDM-GCC-64\\bin\\g++.exe",
+			"command": "C:\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
